@@ -76,15 +76,6 @@
             }
         },
         "/funcionario":{
-            "path": {
-                "operationId": "funcionario",
-                "description":"",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
 
         }
     }
