@@ -1,7 +1,7 @@
 {
-  "name": "RM",
+  "name": "RMAPI",
   "version": "1.0.0",
-  "description": "",
+  "description": "Customização da API do RM",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
