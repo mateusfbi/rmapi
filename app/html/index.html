@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>API Title</title>
+  <title>API RM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -844,26 +844,144 @@ ul.nav-tabs {
     defs["inline_object"] = {
   "type" : "object",
   "properties" : {
+    "cpf" : {
+      "type" : "string"
+    },
     "nome" : {
       "type" : "string"
     },
-    "DTNASCIMENTO" : {
+    "sexo" : {
+      "type" : "string"
+    },
+    "dtnasc" : {
       "type" : "string",
       "format" : "YYYY-MM-DD"
     },
-    "SEXO" : {
+    "naturalidade" : {
       "type" : "string"
     },
-    "NATURALIDADE" : {
+    "nacionalidade" : {
       "type" : "string"
     },
-    "EMAIL" : {
+    "grauinst" : {
       "type" : "string"
     },
-    "TELEFONE1" : {
+    "email" : {
       "type" : "string"
     },
-    "CARTIDENTIDADE" : {
+    "telefone" : {
+      "type" : "string"
+    },
+    "rg" : {
+      "type" : "string"
+    },
+    "ufrg" : {
+      "type" : "string"
+    },
+    "emissorrg" : {
+      "type" : "string"
+    },
+    "dtemissaorg" : {
+      "type" : "string",
+      "format" : "YYYY-MM-DD"
+    },
+    "rua" : {
+      "type" : "string"
+    },
+    "numero" : {
+      "type" : "string"
+    },
+    "bairro" : {
+      "type" : "string"
+    },
+    "cidade" : {
+      "type" : "string"
+    },
+    "uf" : {
+      "type" : "string"
+    },
+    "cep" : {
+      "type" : "string"
+    },
+    "pais" : {
+      "type" : "string"
+    }
+  }
+};
+    defs["inline_object_1"] = {
+  "type" : "object",
+  "properties" : {
+    "cpf" : {
+      "type" : "string"
+    },
+    "nome" : {
+      "type" : "string"
+    },
+    "sexo" : {
+      "type" : "string"
+    },
+    "dtnasc" : {
+      "type" : "string",
+      "format" : "YYYY-MM-DD"
+    },
+    "naturalidade" : {
+      "type" : "string"
+    },
+    "nacionalidade" : {
+      "type" : "string"
+    },
+    "grauinst" : {
+      "type" : "string"
+    },
+    "email" : {
+      "type" : "string"
+    },
+    "telefone" : {
+      "type" : "string"
+    },
+    "rg" : {
+      "type" : "string"
+    },
+    "ufrg" : {
+      "type" : "string"
+    },
+    "emissorrg" : {
+      "type" : "string"
+    },
+    "dtemissaorg" : {
+      "type" : "string",
+      "format" : "YYYY-MM-DD"
+    },
+    "rua" : {
+      "type" : "string"
+    },
+    "numero" : {
+      "type" : "string"
+    },
+    "bairro" : {
+      "type" : "string"
+    },
+    "cidade" : {
+      "type" : "string"
+    },
+    "uf" : {
+      "type" : "string"
+    },
+    "cep" : {
+      "type" : "string"
+    },
+    "pais" : {
+      "type" : "string"
+    }
+  }
+};
+    defs["inline_object_2"] = {
+  "type" : "object",
+  "properties" : {
+    "cpf" : {
+      "type" : "string"
+    },
+    "sitacao" : {
       "type" : "string"
     }
   }
@@ -897,11 +1015,14 @@ ul.nav-tabs {
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
                   <li class="nav-header" data-group="Default"><a href="#api-Default">API Methods - Default</a></li>
+                    <li data-group="Default" data-name="cadastro" class="">
+                      <a href="#api-Default-cadastro">cadastro</a>
+                    </li>
                     <li data-group="Default" data-name="candidato" class="">
                       <a href="#api-Default-candidato">candidato</a>
                     </li>
-                    <li data-group="Default" data-name="funcionario" class="">
-                      <a href="#api-Default-funcionario">funcionario</a>
+                    <li data-group="Default" data-name="situacao" class="">
+                      <a href="#api-Default-situacao">situacao</a>
                     </li>
           </ul>
         </nav>
@@ -909,7 +1030,7 @@ ul.nav-tabs {
       <div id="content">
         <div id="project">
           <div class="pull-left">
-            <h1>API Title</h1>
+            <h1>API RM</h1>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -919,13 +1040,381 @@ ul.nav-tabs {
               <div class="app-desc">Version: 1.0</div>
             <hr>
             <div id="app-description" class="app-desc">
-                Api desenvolvida para Integração com ERP
+                Api desenvolvida para customizar integração do ERP do Cliente com TOTVS RM
             </div>
           </div>
         </div>
         <div id="sections">
                 <section id="api-Default">
                   <h1>Default</h1>
+                    <div id="api-Default-cadastro">
+                      <article id="api-Default-cadastro-0" data-group="User" data-name="cadastro" data-version="0">
+                        <div class="pull-left">
+                          <h1>cadastro</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked">Atualizar dados cadastrais do Autonomo</p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/cadastro</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-cadastro-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-cadastro-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-cadastro-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-cadastro-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-cadastro-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-cadastro-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-cadastro-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-cadastro-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-cadastro-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-cadastro-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-cadastro-0-python">Python</a></li>
+                          <li class=""><a href="#examples-Default-cadastro-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-cadastro-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://localhost:3333/totvs/v1/cadastro"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-cadastro-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        InlineObject1 inlineObject1 = ; // InlineObject1 | 
+        try {
+            inline_response_200 result = apiInstance.cadastro(inlineObject1);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#cadastro");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-cadastro-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        InlineObject1 inlineObject1 = ; // InlineObject1 | 
+        try {
+            inline_response_200 result = apiInstance.cadastro(inlineObject1);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#cadastro");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-cadastro-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-cadastro-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">InlineObject1 *inlineObject1 = ; // 
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+[apiInstance cadastroWith:inlineObject1
+              completionHandler: ^(inline_response_200 output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-cadastro-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var ApiRm = require('api_rm');
+
+var api = new ApiRm.DefaultApi()
+var inlineObject1 = ; // {InlineObject1} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.cadastro(inlineObject1, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-cadastro-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-cadastro-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class cadastroExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new DefaultApi();
+            var inlineObject1 = new InlineObject1(); // InlineObject1 | 
+
+            try
+            {
+                inline_response_200 result = apiInstance.cadastro(inlineObject1);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.cadastro: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-cadastro-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new OpenAPITools\Client\Api\DefaultApi();
+$inlineObject1 = ; // InlineObject1 | 
+
+try {
+    $result = $api_instance->cadastro($inlineObject1);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->cadastro: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-cadastro-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::DefaultApi;
+
+my $api_instance = WWW::OPenAPIClient::DefaultApi->new();
+my $inlineObject1 = WWW::OPenAPIClient::Object::InlineObject1->new(); # InlineObject1 | 
+
+eval { 
+    my $result = $api_instance->cadastro(inlineObject1 => $inlineObject1);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->cadastro: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-cadastro-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = openapi_client.DefaultApi()
+inlineObject1 =  # InlineObject1 | 
+
+try: 
+    api_response = api_instance.cadastro(inlineObject1)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->cadastro: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-cadastro-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate DefaultApi;
+
+pub fn main() {
+    let inlineObject1 = ; // InlineObject1
+
+    let mut context = DefaultApi::Context::default();
+    let result = client.cadastro(inlineObject1, &context).wait();
+    println!("{:?}", result);
+
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">inlineObject1 <span style="color:red;">*</span></td>
+<td>
+<p class="marked"></p>
+<script>
+$(document).ready(function() {
+  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_object_1"
+      }
+    }
+  },
+  "required" : true
+};
+  var schema = findNode('schema', schemaWrapper).schema;
+  if (!schema) {
+      schema = schemaWrapper.schema;
+  }
+  if (schema.$ref != null) {
+    schema = defsParser.$refs.get(schema.$ref);
+  } else {
+    schemaWrapper.definitions = Object.assign({}, defs);
+    $RefParser.dereference(schemaWrapper).catch(function(err) {
+      console.log(err);
+    });
+  }
+
+  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+  var result = $('#d2e199_cadastro_inlineObject1');
+  result.empty();
+  result.append(view.render());
+});
+</script>
+<div id="d2e199_cadastro_inlineObject1"></div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-Default-cadastro-title-200"></h3>
+                            <p id="examples-Default-cadastro-description-200" class="marked"></p>
+                            <script>
+                              var responseDefault200_description = `OK`;
+                              var responseDefault200_description_break = responseDefault200_description.indexOf('\n');
+                              if (responseDefault200_description_break == -1) {
+                                $("#examples-Default-cadastro-title-200").text("Status: 200 - " + responseDefault200_description);
+                              } else {
+                                $("#examples-Default-cadastro-title-200").text("Status: 200 - " + responseDefault200_description.substring(0, responseDefault200_description_break));
+                                $("#examples-Default-cadastro-description-200").html(responseDefault200_description.substring(responseDefault200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Default-cadastro-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Default-cadastro-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Default-cadastro-200-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Default-cadastro-200-schema">
+                                  <div id="responses-Default-cadastro-schema-200" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                            schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Default-cadastro-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Default-cadastro-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Default-cadastro-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Default-cadastro-title-404"></h3>
+                            <p id="examples-Default-cadastro-description-404" class="marked"></p>
+                            <script>
+                              var responseDefault404_description = `error`;
+                              var responseDefault404_description_break = responseDefault404_description.indexOf('\n');
+                              if (responseDefault404_description_break == -1) {
+                                $("#examples-Default-cadastro-title-404").text("Status: 404 - " + responseDefault404_description);
+                              } else {
+                                $("#examples-Default-cadastro-title-404").text("Status: 404 - " + responseDefault404_description.substring(0, responseDefault404_description_break));
+                                $("#examples-Default-cadastro-description-404").html(responseDefault404_description.substring(responseDefault404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Default-cadastro-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Default-cadastro-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-Default-candidato">
                       <article id="api-Default-candidato-0" data-group="User" data-name="candidato" data-version="0">
                         <div class="pull-left">
@@ -935,7 +1424,7 @@ ul.nav-tabs {
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Cadastro do Autonomo como Candidato</p>
+                        <p class="marked">Cadastro do Autônomo como candidato</p>
                         <p></p>
                         <br />
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/candidato</span></code></pre>
@@ -1028,9 +1517,9 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
                             </div>
 
                             <div class="tab-pane" id="examples-Default-candidato-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var ApiTitle = require('api_title');
+                              <pre class="prettyprint"><code class="language-js">var ApiRm = require('api_rm');
 
-var api = new ApiTitle.DefaultApi()
+var api = new ApiRm.DefaultApi()
 var inlineObject = ; // {InlineObject} 
 
 var callback = function(error, data, response) {
@@ -1294,42 +1783,42 @@ $(document).ready(function() {
                         </article>
                       </div>
                       <hr>
-                    <div id="api-Default-funcionario">
-                      <article id="api-Default-funcionario-0" data-group="User" data-name="funcionario" data-version="0">
+                    <div id="api-Default-situacao">
+                      <article id="api-Default-situacao-0" data-group="User" data-name="situacao" data-version="0">
                         <div class="pull-left">
-                          <h1>funcionario</h1>
+                          <h1>situacao</h1>
                           <p></p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked"></p>
+                        <p class="marked">Alteração da situação do Autônomo</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/funcionario/{cpf}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/situacao</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Default-funcionario-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Default-funcionario-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Default-funcionario-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Default-funcionario-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Default-funcionario-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Default-funcionario-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Default-funcionario-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Default-funcionario-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Default-funcionario-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Default-funcionario-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Default-funcionario-0-python">Python</a></li>
-                          <li class=""><a href="#examples-Default-funcionario-0-rust">Rust</a></li>
+                          <li class="active"><a href="#examples-Default-situacao-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-situacao-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-situacao-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-situacao-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-situacao-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-situacao-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-situacao-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-situacao-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-situacao-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-situacao-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-situacao-0-python">Python</a></li>
+                          <li class=""><a href="#examples-Default-situacao-0-rust">Rust</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Default-funcionario-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X PUT "https://localhost:3333/totvs/v1/funcionario/{cpf}"</code></pre>
+                          <div class="tab-pane active" id="examples-Default-situacao-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://localhost:3333/totvs/v1/situacao"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-Default-funcionario-0-java">
+                          <div class="tab-pane" id="examples-Default-situacao-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
 import org.openapitools.client.auth.*;
 import org.openapitools.client.model.*;
@@ -1343,11 +1832,12 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
-        String cpf = cpf_example; // String | 
+        InlineObject2 inlineObject2 = ; // InlineObject2 | 
         try {
-            apiInstance.funcionario(cpf);
+            inline_response_200 result = apiInstance.situacao(inlineObject2);
+            System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#funcionario");
+            System.err.println("Exception when calling DefaultApi#situacao");
             e.printStackTrace();
         }
     }
@@ -1355,34 +1845,38 @@ public class DefaultApiExample {
 </code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-Default-funcionario-0-android">
+                          <div class="tab-pane" id="examples-Default-situacao-0-android">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.DefaultApi;
 
 public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
-        String cpf = cpf_example; // String | 
+        InlineObject2 inlineObject2 = ; // InlineObject2 | 
         try {
-            apiInstance.funcionario(cpf);
+            inline_response_200 result = apiInstance.situacao(inlineObject2);
+            System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#funcionario");
+            System.err.println("Exception when calling DefaultApi#situacao");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-Default-funcionario-0-groovy">
+  <div class="tab-pane" id="examples-Default-situacao-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-Default-funcionario-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *cpf = cpf_example; //  (default to null)
+                            <div class="tab-pane" id="examples-Default-situacao-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">InlineObject2 *inlineObject2 = ; // 
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
-[apiInstance funcionarioWith:cpf
-              completionHandler: ^(NSError* error) {
+[apiInstance situacaoWith:inlineObject2
+              completionHandler: ^(inline_response_200 output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
                             if (error) {
                                 NSLog(@"Error: %@", error);
                             }
@@ -1390,27 +1884,27 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-funcionario-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var ApiTitle = require('api_title');
+                            <div class="tab-pane" id="examples-Default-situacao-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var ApiRm = require('api_rm');
 
-var api = new ApiTitle.DefaultApi()
-var cpf = cpf_example; // {String} 
+var api = new ApiRm.DefaultApi()
+var inlineObject2 = ; // {InlineObject2} 
 
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.funcionario(cpf, callback);
+api.situacao(inlineObject2, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-Default-funcionario-0-angular">
+                            <!--<div class="tab-pane" id="examples-Default-situacao-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-Default-funcionario-0-csharp">
+                            <div class="tab-pane" id="examples-Default-situacao-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
@@ -1419,21 +1913,22 @@ using Org.OpenAPITools.Model;
 
 namespace Example
 {
-    public class funcionarioExample
+    public class situacaoExample
     {
         public void main()
         {
             
             var apiInstance = new DefaultApi();
-            var cpf = cpf_example;  // String |  (default to null)
+            var inlineObject2 = new InlineObject2(); // InlineObject2 | 
 
             try
             {
-                apiInstance.funcionario(cpf);
+                inline_response_200 result = apiInstance.situacao(inlineObject2);
+                Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling DefaultApi.funcionario: " + e.Message );
+                Debug.Print("Exception when calling DefaultApi.situacao: " + e.Message );
             }
         }
     }
@@ -1441,38 +1936,40 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-funcionario-0-php">
+                            <div class="tab-pane" id="examples-Default-situacao-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new OpenAPITools\Client\Api\DefaultApi();
-$cpf = cpf_example; // String | 
+$inlineObject2 = ; // InlineObject2 | 
 
 try {
-    $api_instance->funcionario($cpf);
+    $result = $api_instance->situacao($inlineObject2);
+    print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->funcionario: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DefaultApi->situacao: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-funcionario-0-perl">
+                            <div class="tab-pane" id="examples-Default-situacao-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::OPenAPIClient::Configuration;
 use WWW::OPenAPIClient::DefaultApi;
 
 my $api_instance = WWW::OPenAPIClient::DefaultApi->new();
-my $cpf = cpf_example; # String | 
+my $inlineObject2 = WWW::OPenAPIClient::Object::InlineObject2->new(); # InlineObject2 | 
 
 eval { 
-    $api_instance->funcionario(cpf => $cpf);
+    my $result = $api_instance->situacao(inlineObject2 => $inlineObject2);
+    print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling DefaultApi->funcionario: $@\n";
+    warn "Exception when calling DefaultApi->situacao: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-funcionario-0-python">
+                            <div class="tab-pane" id="examples-Default-situacao-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import openapi_client
@@ -1481,22 +1978,23 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = openapi_client.DefaultApi()
-cpf = cpf_example # String |  (default to null)
+inlineObject2 =  # InlineObject2 | 
 
 try: 
-    api_instance.funcionario(cpf)
+    api_response = api_instance.situacao(inlineObject2)
+    pprint(api_response)
 except ApiException as e:
-    print("Exception when calling DefaultApi->funcionario: %s\n" % e)</code></pre>
+    print("Exception when calling DefaultApi->situacao: %s\n" % e)</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-funcionario-0-rust">
+                            <div class="tab-pane" id="examples-Default-situacao-0-rust">
                               <pre class="prettyprint"><code class="language-rust">extern crate DefaultApi;
 
 pub fn main() {
-    let cpf = cpf_example; // String
+    let inlineObject2 = ; // InlineObject2
 
     let mut context = DefaultApi::Context::default();
-    let result = client.funcionario(cpf, &context).wait();
+    let result = client.situacao(inlineObject2, &context).wait();
     println!("{:?}", result);
 
 }
@@ -1511,29 +2009,49 @@ pub fn main() {
 
                           <h2>Parameters</h2>
 
-                            <div class="methodsubtabletitle">Path parameters</div>
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
                             <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">cpf*</td>
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">inlineObject2 <span style="color:red;">*</span></td>
 <td>
+<p class="marked"></p>
+<script>
+$(document).ready(function() {
+  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_object_2"
+      }
+    }
+  },
+  "required" : true
+};
+  var schema = findNode('schema', schemaWrapper).schema;
+  if (!schema) {
+      schema = schemaWrapper.schema;
+  }
+  if (schema.$ref != null) {
+    schema = defsParser.$refs.get(schema.$ref);
+  } else {
+    schemaWrapper.definitions = Object.assign({}, defs);
+    $RefParser.dereference(schemaWrapper).catch(function(err) {
+      console.log(err);
+    });
+  }
 
-
-    <div id="d2e199_funcionario_cpf">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
+  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+  var result = $('#d2e199_situacao_inlineObject2');
+  result.empty();
+  result.append(view.render());
+});
+</script>
+<div id="d2e199_situacao_inlineObject2"></div>
 </td>
 </tr>
 
@@ -1541,30 +2059,94 @@ pub fn main() {
 
 
 
-
-
                           <h2>Responses</h2>
-                            <h3 id="examples-Default-funcionario-title-200"></h3>
-                            <p id="examples-Default-funcionario-description-200" class="marked"></p>
+                            <h3 id="examples-Default-situacao-title-200"></h3>
+                            <p id="examples-Default-situacao-description-200" class="marked"></p>
                             <script>
                               var responseDefault200_description = `OK`;
                               var responseDefault200_description_break = responseDefault200_description.indexOf('\n');
                               if (responseDefault200_description_break == -1) {
-                                $("#examples-Default-funcionario-title-200").text("Status: 200 - " + responseDefault200_description);
+                                $("#examples-Default-situacao-title-200").text("Status: 200 - " + responseDefault200_description);
                               } else {
-                                $("#examples-Default-funcionario-title-200").text("Status: 200 - " + responseDefault200_description.substring(0, responseDefault200_description_break));
-                                $("#examples-Default-funcionario-description-200").html(responseDefault200_description.substring(responseDefault200_description_break));
+                                $("#examples-Default-situacao-title-200").text("Status: 200 - " + responseDefault200_description.substring(0, responseDefault200_description_break));
+                                $("#examples-Default-situacao-description-200").html(responseDefault200_description.substring(responseDefault200_description_break));
                               }
                             </script>
 
 
-                            <ul id="responses-detail-Default-funcionario-200" class="nav nav-tabs nav-tabs-examples" >
+                            <ul id="responses-detail-Default-situacao-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Default-situacao-200-schema">Schema</a>
+                                </li>
+
+
 
 
                             </ul>
 
 
-                            <div class="tab-content" id="responses-Default-funcionario-200-wrapper" style='margin-bottom: 10px;'>
+                            <div class="tab-content" id="responses-Default-situacao-200-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Default-situacao-200-schema">
+                                  <div id="responses-Default-situacao-schema-200" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                            schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Default-situacao-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Default-situacao-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Default-situacao-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Default-situacao-title-404"></h3>
+                            <p id="examples-Default-situacao-description-404" class="marked"></p>
+                            <script>
+                              var responseDefault404_description = `error`;
+                              var responseDefault404_description_break = responseDefault404_description.indexOf('\n');
+                              if (responseDefault404_description_break == -1) {
+                                $("#examples-Default-situacao-title-404").text("Status: 404 - " + responseDefault404_description);
+                              } else {
+                                $("#examples-Default-situacao-title-404").text("Status: 404 - " + responseDefault404_description.substring(0, responseDefault404_description_break));
+                                $("#examples-Default-situacao-description-404").html(responseDefault404_description.substring(responseDefault404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Default-situacao-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Default-situacao-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>

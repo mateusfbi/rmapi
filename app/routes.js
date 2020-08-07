@@ -8,7 +8,7 @@ routes.get("/",function(req,res){
 	res.sendFile(__dirname + "/html/index.html");
 });
 routes.post("/totvs/v1/candidato", CandidatoController.CadastroCandidato);
-routes.post("/totvs/v1/atualizar-cadastro", FuncionarioController.AtualizarCadastro);
-routes.post("/totvs/v1/atualizar-situacao", FuncionarioController.AlteraSituacao);
+routes.post("/totvs/v1/cadastro", FuncionarioController.AtualizarCadastro);
+routes.post("/totvs/v1/situacao", FuncionarioController.AlteraSituacao);
 
 module.exports = routes;
