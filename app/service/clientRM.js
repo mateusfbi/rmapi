@@ -1,6 +1,6 @@
 const soap = require("soap");
-
-const url = "http://brandaowin:8051/wsDataServer/MEX?wsdl";
+const config = require("mikro-config").default;
+const url = config.get("cfg.url");
 
 const ClientRM = {
   SaveRecord(pDadosRequisicao) {

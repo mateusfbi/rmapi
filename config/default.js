@@ -4,9 +4,10 @@ module.exports = {
   },
   authrm: {
     user: 'mestre',
-    passwd: 'totvsrm'
+    passwd: 'totvs'
   },
   cfg:{
-    codcoligada: '1'
+    url: 'http://brandaowin:8051/wsDataServer/MEX?wsdl',
+    codColigada: '1'
   }
 };

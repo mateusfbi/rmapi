@@ -1,0 +1,230 @@
+{
+    "openapi":"3.0.2",
+    "info": {
+        "title":"API RM",
+        "version":"1.0",
+        "description": "Api desenvolvida para customizar integração do ERP do Cliente com TOTVS RM"
+    },
+    "servers": [
+        {"url":"https://localhost:3333/totvs/v1"}
+    ],
+    "tags":[
+        {"name": "candidato",
+        "description": "Cadastro do Autônomo como candidato"}
+    ],
+    "paths": {
+        "/candidato": {
+            "post": {
+                "operationId": "candidato",
+                "description":"Cadastro do Autônomo como candidato",
+                "requestBody":{
+                    "description": "JSON que representa o candidato a ser inserido",
+                    "required": true,
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "cpf":{"type": "string"},
+                                    "nome":{"type": "string"},
+                                    "sexo":{"type": "string"},
+                                    "dtnasc":{"type": "string","format": "YYYY-MM-DD"},
+                                    "naturalidade":{"type": "string"},
+                                    "nacionalidade":{"type": "string"},
+                                    "grauinst":{"type": "string"},
+                                    "email":{"type": "string"},
+                                    "telefone":{"type": "string"},
+                                    "rg":{"type": "string"},
+                                    "ufrg":{"type": "string"},
+                                    "emissorrg":{"type": "string"},
+                                    "dtemissaorg":{"type": "string","format": "YYYY-MM-DD"},
+                                    "rua":{"type": "string"},
+                                    "numero":{"type": "string"},
+                                    "bairro":{"type": "string"},
+                                    "cidade":{"type": "string"},
+                                    "uf":{"type": "string"},
+                                    "cep":{"type": "string"},
+                                    "pais":{"type": "string"}
+                                }
+                            }
+                        }
+                    }
+                },                
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                              "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "codigo": {
+                                      "type": "string"
+                                    },
+                                    "descricao": {
+                                      "type": "string"
+                                    }
+                                }
+                              }
+                            } 
+                        }    
+                    },
+                    "404":{
+                        "description": "error",
+                        "content": {
+                            "application/json": {
+                              "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "codigo": {
+                                      "type": "string"
+                                    },
+                                    "descricao": {
+                                      "type": "string"
+                                    }
+                                }
+                              }
+                            } 
+                        } 
+                    }
+                }
+            }
+        },
+        "/cadastro":{
+            "post": {
+                "operationId": "cadastro",
+                "description":"Atualizar dados cadastrais do Autonomo",
+                "requestBody":{
+                    "description": "JSON que representa a atualização dos dados cadastrais",
+                    "required": true,
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "cpf":{"type": "string"},
+                                    "nome":{"type": "string"},
+                                    "sexo":{"type": "string"},
+                                    "dtnasc":{"type": "string","format": "YYYY-MM-DD"},
+                                    "naturalidade":{"type": "string"},
+                                    "nacionalidade":{"type": "string"},
+                                    "grauinst":{"type": "string"},
+                                    "email":{"type": "string"},
+                                    "telefone":{"type": "string"},
+                                    "rg":{"type": "string"},
+                                    "ufrg":{"type": "string"},
+                                    "emissorrg":{"type": "string"},
+                                    "dtemissaorg":{"type": "string","format": "YYYY-MM-DD"},
+                                    "rua":{"type": "string"},
+                                    "numero":{"type": "string"},
+                                    "bairro":{"type": "string"},
+                                    "cidade":{"type": "string"},
+                                    "uf":{"type": "string"},
+                                    "cep":{"type": "string"},
+                                    "pais":{"type": "string"}
+                                }
+                            }
+                        }
+                    }
+                },                
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                              "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "codigo": {
+                                      "type": "string"
+                                    },
+                                    "descricao": {
+                                      "type": "string"
+                                    }
+                                }
+                              }
+                            } 
+                        }    
+                    },
+                    "404":{
+                        "description": "error",
+                        "content": {
+                            "application/json": {
+                              "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "codigo": {
+                                      "type": "string"
+                                    },
+                                    "descricao": {
+                                      "type": "string"
+                                    }
+                                }
+                              }
+                            } 
+                        }                         
+                    }
+                }
+            }
+        },
+        "/situacao":{
+            "post": {
+                "operationId": "situacao",
+                "description":"Alteração da situação do Autônomo",
+                "requestBody":{
+                    "description": "JSON que representa a alteração da situação",
+                    "required": true,
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "cpf":{"type": "string"},
+                                    "sitacao":{"type": "string"}
+                                }
+                            }
+                        }
+                    }
+                },                
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                              "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "codigo": {
+                                      "type": "string"
+                                    },
+                                    "descricao": {
+                                      "type": "string"
+                                    }
+                                }
+                              }
+                            } 
+                        }    
+                    },
+                    "404":{
+                        "description": "error",
+                        "content": {
+                            "application/json": {
+                              "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "codigo": {
+                                      "type": "string"
+                                    },
+                                    "descricao": {
+                                      "type": "string"
+                                    }
+                                }
+                              }
+                            } 
+                        } 
+                    }
+                }
+            }
+        }
+    }
+}

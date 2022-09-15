@@ -3,60 +3,66 @@ const config = require("mikro-config").default;
 const convert = require('xml-js');
 const moment = require('moment');
 
-const codColigada = config.get("cfg.codcoligada");
+const codColigada = config.get("cfg.codColigada");
 const usuario = config.get("authrm.user");
 const senha = config.get("authrm.passwd");
-const hoje = moment().utc().format('Y-M-D H:M:S')
-
+const hoje = moment().format("Y-MM-D");
 
 module.exports = {
   async AlteraSituacao(request, response) {
-    const {     
-      cpf,
-      codSituacao
-    } = request.body;
+      const { 
+        cpf, 
+        situacao 
+      } = request.body;
 
-    const dataServer = 'FopFuncData';
-    let resHistorico = "";
-    let chapa = "";
-    let motivoMudanca = "";
+      const dataServer = 'FopFuncData';
+      let resHistorico = "";
+      let chapa = "";
+      let motivoMudanca = "";
 
-    await ClientRM.ReadView({
-      DataServer: dataServer,
-      CodColigada: codColigada,
-      Filtro: `CPF='${cpf}'`,
-      CodSistema: 'G',
-      Usuario: usuario,
-      Senha: senha
-    })
-    .then(response => {
-      const result = convert.xml2js(response.ReadViewResult, { compact: true });
-      chapa = result.NewDataSet.PFunc.CHAPA._text;
-      motivoMudanca = (codSituacao == 'A'?'03':'05');
-      resHistorico = true
-    })
-    .catch(error => (resHistorico = { "status": 0, "Descricção": "CPF não localizado" } ));
-   
-    if(!chapa==""){
-        await ClientRM.SaveRecord({
+      await ClientRM.ReadView({
         DataServer: dataServer,
         CodColigada: codColigada,
-        Xml: `<PFunc>
-                <CODCOLIGADA>${codColigada}</CODCOLIGADA>
-                <CHAPA>${chapa}</CHAPA>
-                <CODSITUACAO>${codSituacao}</CODSITUACAO>
-                <HSTSIT_MOTIVO>${motivoMudanca}</HSTSIT_MOTIVO>
-                <HSTSIT_DATAMUDANCA>${hoje}</HSTSIT_DATAMUDANCA>
-              </PFunc>`,
+        Filtro: `CPF='${cpf}' AND DATADEMISSAO IS NULL`,
         CodSistema: 'G',
         Usuario: usuario,
         Senha: senha
       })
       .then(response => {
-        resHistorico = { "status": 1, "Descricção": "Situação Alterada" };
+	if(situacao=="A" || situacao=="D"){
+	   const result = convert.xml2js(response.ReadViewResult, { compact: true });
+	   console.log(result);
+	   chapa = result.NewDataSet.PFunc.CHAPA._text;	
+		   motivoMudanca = (situacao == 'A'?'01':'03');
+	   console.log(`${chapa} - ${motivoMudanca} - ${situacao}`);
+	   resHistorico = true
+	}else{
+	   resHistorico = `{ "codigo": 0, "Descricao": "Situacao diferente de "A" ou "D"" }`
+	}
       })
-      .catch(error => (resHistorico = `{"status":"0","descricao":"${error}"}`));
-    }  
+      .catch(error => (resHistorico = `{ "codigo": 0, "Descricção": "CPF não localizado - ${error}" }` ));
+    
+      if(!chapa==""){
+          await ClientRM.SaveRecord({
+          DataServer: dataServer,
+          CodColigada: codColigada,
+          Xml: `<FopFunc><PFunc>
+                  <CODCOLIGADA>${codColigada}</CODCOLIGADA>
+                  <CHAPA>${chapa}</CHAPA>
+                  <CODSITUACAO>${situacao}</CODSITUACAO>
+                  <HSTSIT_MOTIVO>${motivoMudanca}</HSTSIT_MOTIVO>
+                  <HSTSIT_DATAMUDANCA>${hoje}</HSTSIT_DATAMUDANCA>
+                </FopFunc></PFunc>`,
+          CodSistema: 'G',
+          Usuario: usuario,
+          Senha: senha
+        })
+        .then(response => {
+          resHistorico = response.SaveRecordResult;
+          resHistorico = resHistorico.indexOf("=") > 0?`{"codigo":"0","descricao":"${resHistorico.substring(0,resHistorico.indexOf("="))}"}`:`{"codigo":"1","descricao":"Situação Alterada (${resHistorico})"}`; 
+        })
+        .catch(error => (resHistorico = `{"codigo":"0","descricao":"${error}"}`));
+      }  
 
     return response.send(resHistorico);
     
@@ -64,7 +70,7 @@ module.exports = {
   async AtualizarCadastro(request, response) {
       const {
         cpf,
-        nome,     
+        nome,
         dtnasc,
         ufnatal,
         naturalidade,
@@ -77,7 +83,7 @@ module.exports = {
         cidade,
         estado,
         cep,
-        pais,
+        pais
       } = request.body;
   
       const dataServer = 'RhuPessoaData';
@@ -88,54 +94,104 @@ module.exports = {
         DataServer: dataServer,
         CodColigada: codColigada,
         Filtro: `CPF='${cpf}'`,
-        CodSistema: 'G',
+        CodSistema: 'V',
         Usuario: usuario,
         Senha: senha
       })
       .then(response => {
           const result = convert.xml2js(response.ReadViewResult, { compact: true });
-          CodPessoa = (JSON.stringify(result.NewDataSet) === "{}"?"":result.NewDataSet.VCandidatos.CODPESSOA._text);
-          resHistorico = (CodPessoa != ""?'':'{"status":"","descricao":"Pessoa não cadastrada"}')
+          CodPessoa = (JSON.stringify(result.NewDataSet) === "{}"?"":result.NewDataSet.PPESSOA.CODIGO._text);
+          resHistorico = (CodPessoa != ""?'':'{"codigo":"","descricao":"Pessoa não cadastrada"}')
       })
       .catch(error => (resHistorico = error));
-  
-      if(CodPessoa == ""){  
+
+      let xml = `<RhuPessoa><PPessoa><CODIGO>${CodPessoa}</CODIGO>`; 
+          xml += nome != ""?`<NOME>${nome}</NOME>`:"";
+          xml += dtnasc != ""?`<DTNASCIMENTO>${dtnasc}T00:00:00</DTNASCIMENTO>`:"";
+          xml += ufnatal != ""?`<ESTADONATAL>${ufnatal}</ESTADONATAL>`:"";
+          xml += naturalidade != ""?`<NATURALIDADE>${naturalidade}</NATURALIDADE>`:"";
+          xml += sexo != ""?`<SEXO>${sexo}</SEXO>`:"";
+          xml += email != ""?`<EMAIL>${email}</EMAIL>`:"";
+          xml += telefone != ""?`<TELEFONE1>${telefone}</TELEFONE1>`:"";
+          xml += rua != ""?`<RUA>${rua}</RUA>`:"";
+          xml += numero != ""?`<NUMERO>${numero}</NUMERO> `:"";
+          xml += bairro != ""?`<BAIRRO>${bairro}</BAIRRO>`:"";
+          xml += cidade != ""?`<CIDADE>${cidade}/CIDADE>`:"";
+          xml += estado != ""?`<ESTADO>${estado}</ESTADO>`:"";
+          xml += cep != ""?`<CEP>${cep}</CEP>`:"";
+          xml += pais != ""?`<PAIS>${pais}</PAIS> `:"";
+          xml += "</PPessoa></RhuPessoa>";
+          console.log(xml);
+
+      if(CodPessoa != ""){  
           await ClientRM.SaveRecord({
               DataServer: dataServer,
               CodColigada: codColigada,
-              Xml: `<PPessoa>  
-                <CODIGO>${CodPessoa}</CODIGO>  
-                <NOME>${nome}</NOME>  
-                <DTNASCIMENTO>${dtnasc}T00:00:00</DTNASCIMENTO>  
-                <ESTADONATAL>${ufnatal}</ESTADONATAL>  
-                <NATURALIDADE>${naturalidade}</NATURALIDADE>  
-                <SEXO>${sexo}</SEXO>  
-                <EMAIL>${email}</EMAIL>  
-                <RUA>${rua}</RUA>  
-                <NUMERO>${numero}</NUMERO>  
-                <BAIRRO>${bairro}</BAIRRO>  
-                <CIDADE>${cidade}/CIDADE>  
-                <ESTADO>${estado}</ESTADO>  
-                <CEP>${cep}</CEP>  
-                <PAIS>${pais}</PAIS>  
-                <TELEFONE1>${telefone}</TELEFONE1>  
-                <CORRACA>0</CORRACA>  
-                <NACIONALIDADE>10</NACIONALIDADE>  
-                <CANDIDATO>1</CANDIDATO>  
-                <FUNCIONARIO>1</FUNCIONARIO>  
-              </PPessoa>`,
+              Xml: xml,
               CodSistema: 'G',
               Usuario: usuario,
               Senha: senha
           })
           .then(response => {           
-              resHistorico = {"status":"1","descricao":"Alteração Realizada"}
+            resHistorico = response.SaveRecordResult;
+            resHistorico = resHistorico.indexOf("=") > 0?`{"codigo":"0","descricao":"${resHistorico.substring(0,resHistorico.indexOf("="))}"}`:`{"codigo":"1","descricao":"Dados Atualizados (${resHistorico})"}`; 
           })
-          .catch(error => (resHistorico = `{"status":"0","descricao":"${error}"}`));       
+          .catch(error => (resHistorico = `{"codigo":"0","descricao":"${error}"}`));       
       }
   
       return response.send(resHistorico);
   
-      }
+  },
+  async Pesquisar(request, response) {
+
+    const cpf = request.body.CPF;
+
+    const dataServer = 'FopFuncData';
+    let resHistorico = "";
+    let chapa = "";
+  
+    await ClientRM.ReadView({
+        DataServer: dataServer,
+        CodColigada: '1',
+        Filtro: `CPF='${cpf}'`,
+        CodSistema: 'P',
+        Usuario: usuario,
+        Senha: senha
+      })
+      .then(response => {
+        const result = convert.xml2js(response.ReadViewResult, { compact: true });
+        //chapa = result.NewDataSet.PFunc.CHAPA._text;
+        //situacao = result.NewDataSet.PFunc.CODSITUACAO._text;	
+        const ret = result.NewDataSet.PFunc;
+        const qtd = ret.length;
+        console.log(qtd);
+        i = 0
+        if(qtd == undefined){
+            resHistorico = `{ "NOME": "${ret.NOME._text}", "SITUACAO": "${ret.CODSITUACAO._text}" }`
+        }else{
+          let dataB = new Date();
+          
+          ret.forEach(element => {
+              let dataAdm = element.DATAADMISSAO._text.split("T");              
+              let dataA = new Date(dataAdm[0]);	
+              console.log(`DATA A: ${dataA} - DATA B ${dataB}`);
+              if (dataB > dataA){ 
+                resHistorico = `{ "NOME": "${element.NOME._text}", "SITUACAO": "${element.CODSITUACAO._text}" }`
+              }else{
+                resHistorico = `{ "NOME": "${element.NOME._text}", "SITUACAO": "${element.CODSITUACAO._text}" }`
+              }
+              dataB = dataA  
+          });
+        }
+        //resHistorico = result.NewDataSet.PFunc;
+
+      })
+      .catch(error => (resHistorico = `{ "codigo": 0, "Descricao": "CPF nao localizado - ${error}" }` ));
+
+
+    return response.send(resHistorico);
+  
+  }
+
 
 };
